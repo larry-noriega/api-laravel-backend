@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\TransactionController;
+use App\Presenter\Http\Controllers\TransactionController;
 
 Route::get('/getPaymentsMethods', [TransactionController::class, 'getPaymentsMethods']);
 Route::post('/generatePayment', [TransactionController::class, 'generatePayment']);
