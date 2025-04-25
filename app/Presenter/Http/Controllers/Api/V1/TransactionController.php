@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Presenter\Http\Controllers;
+namespace App\Presenter\Http\Controllers\Api\V1;
 
 use App\Application\Services\PaymentService;
 use App\Application\Services\TransactionService;
-use App\Presenter\Http\Controllers\Controller;
+use App\Presenter\Http\Controllers\Api\V1\Controller;
 use App\Presenter\Resources\CustomerResource;
 use App\Presenter\Resources\PaymentMethodResource;
 use App\Presenter\Resources\TransactionCollection;
@@ -22,25 +22,13 @@ class TransactionController extends Controller
     {
         $this->transactionService = $transactionService;
     }
-    
-    /**
-     * Summary of getTransaction
-     * @param Request $request
-     * @return TransactionResource
-     */
-    public function getTransaction(Request $request): TransactionResource
-    {
-        $id = $request->id;
-
-        return new TransactionResource($this->transactionService->GetTransactionByID( (int)$id));     
-    }
 
     /**
      * Summary of getTransactions
      * @param Request $request
      * @return TransactionCollection
      */
-    public function getTransactions(): TransactionCollection
+    public function index(): TransactionCollection
     {
         $transactions = $this->transactionService->GetTransactionsReport();
 
@@ -52,4 +40,18 @@ class TransactionController extends Controller
 
         return new TransactionCollection($transactions);
     }
+    
+    /**
+     * Summary of getTransaction
+     * @param Request $request
+     * @return TransactionResource
+     */
+    public function show(Request $request): TransactionResource
+    {
+        $id = $request->id;
+
+        return new TransactionResource($this->transactionService->GetTransactionByID( (int)$id));     
+    }
+
+    
 }

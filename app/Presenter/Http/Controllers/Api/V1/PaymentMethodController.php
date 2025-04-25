@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Presenter\Http\Controllers;
+namespace App\Presenter\Http\Controllers\Api\V1;
 
 use App\Domain\Repository\PaymentMethodRepository;
-use App\Presenter\Http\Controllers\Controller;
+use App\Presenter\Http\Controllers\Api\V1\Controller;
 use App\Presenter\Resources\PaymentMethodCollection;
 use App\Presenter\Resources\PaymentMethodResource;
 
@@ -21,16 +21,16 @@ class PaymentMethodController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function getPaymentsMethods(): PaymentMethodCollection
+    public function index(): PaymentMethodCollection
     {
         return new PaymentMethodCollection($this->paymentMethodRepository->GetPaymentMethods());
     }
-    
+
     /**
      * Display the specified resource.
      */
     public function show(string $name): PaymentMethodResource
     {
-        return new PaymentMethodResource($this->paymentMethodRepository->GetPaymentMethodByName($name));        
+        return new PaymentMethodResource($this->paymentMethodRepository->GetPaymentMethodByName($name));
     }
 }
