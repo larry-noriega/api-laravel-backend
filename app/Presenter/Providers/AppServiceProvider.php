@@ -8,6 +8,7 @@ use App\Application\Services\PaymentService;
 use App\Application\Services\TransactionService;
 use App\Domain\PaymentServiceInterface;
 use App\Domain\TransactionServiceInterface;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

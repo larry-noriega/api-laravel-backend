@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Domain\Repository;
 
-use App\Domain\Models\CustomerModel;
+use App\Domain\Models\Customer;
 use Illuminate\Support\Collection;
 
 interface CustomerRepository
 {
   /**
    * Summary of GetCustomers
-   * @return Collection<int, CustomerModel>
+   * @return Collection<int, Customer>
    */
   public function GetCustomers(): Collection;
 
-  public function GetCustomerByDocument(string $number_document): ?CustomerModel;
+  public function GetCustomerByDocument(string $number_document): ?Customer;
 
-  public function CreateCustomer(CustomerModel $customer_model): CustomerModel;
+  public function CreateCustomer(Customer $customer_model): Customer;
 }

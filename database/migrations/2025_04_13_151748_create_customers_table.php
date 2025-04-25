@@ -14,7 +14,12 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('type_document');
-            $table->string('number_document');
+            $table->foreign('type_document')                
+                ->references('value')
+                ->on('document_types')
+                ->onDelete('restrict');
+
+            $table->string('number_document')->unique();
             $table->string('name');
             $table->string('email');
             $table->json('preferences'); 

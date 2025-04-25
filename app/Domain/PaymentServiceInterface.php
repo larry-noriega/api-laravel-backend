@@ -4,7 +4,7 @@ declare(strict_types= 1);
 
 namespace App\Domain;
 
-use App\Domain\Models\TransactionModel;
+use App\Domain\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -22,5 +22,5 @@ interface PaymentServiceInterface
      * @param Request $request
      * @return void
      */
-    public function generatePayment(Request $request): TransactionModel;
+    public function generatePayment(Request $request): Transaction;
 }

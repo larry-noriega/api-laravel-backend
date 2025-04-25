@@ -9,7 +9,7 @@ use App\Domain\Enums\PaymentMethodEnum;
 use App\Domain\Enums\CurrencyEnum;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class TransactionModel extends Model
+class Transaction extends Model
 {
   protected $table = "transactions";  
 
@@ -32,6 +32,6 @@ class TransactionModel extends Model
   ];
 
   public function Customer(): BelongsTo {
-      return $this->belongsTo(CustomerModel::class);
+      return $this->belongsTo(Customer::class);
   }
 }

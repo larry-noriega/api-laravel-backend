@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presenter\Http\Controllers\Api\V1;
 
-use App\Application\Services\PaymentService;
+use App\Domain\PaymentServiceInterface;
 use  App\Presenter\Http\Controllers\Api\V1\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
  
 class PaymentController extends Controller
 {
-    protected PaymentService $paymentService;
+    protected PaymentServiceInterface $paymentService;
 
-    public function __construct(PaymentService $transactionService)
+    public function __construct(PaymentServiceInterface $transactionService)
     {
         $this->paymentService = $transactionService;
     }

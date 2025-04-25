@@ -5,48 +5,39 @@ declare(strict_types=1);
 namespace App\Infrastructure\DataBase;
 
 use App\Domain\Repository\CustomerRepository;
-use \App\Domain\Models\CustomerModel;
+use \App\Domain\Models\Customer;
 use Illuminate\Support\Collection;
 
 class EloquentCustomerRepository implements CustomerRepository
 {
   /**
    * Summary of GetCustomers
-   * @return Collection<int, CustomerModel>
+   * @return Collection<int, Customer>
    */
   public function GetCustomers(): Collection
   {
-    return CustomerModel::all();    
+    return Customer::all();    
   }
 
   /**
    * Summary of GetCustomerByDocument
    * @param string $number_document
-   * @return CustomerModel|null
+   * @return Customer|null
    */
-  public function GetCustomerByDocument(string $number_document): ?CustomerModel
+  public function GetCustomerByDocument(string $number_document): ?Customer
   {
-    return CustomerModel::where('number_document', $number_document)->first();
+    return Customer::where('number_document', $number_document)->first();
   }
 
   /**
    * Summary of CreateCustomer
-   * @param CustomerModel $data
-   * @return CustomerModel
+   * @param Customer $customer
+   * @return Customer
    */
-  public function CreateCustomer(CustomerModel $data): CustomerModel
+  public function CreateCustomer(Customer $customer): Customer
   {
-    return CustomerModel::create([$data]);
+    $customer->save([$customer]);
+
+    return $customer;
   }
-
-  // public function create(User $user): void
-  // {
-  //     $userModel = new UserModel();
-  //     $userModel->name = $user->getName();
-  //     $userModel->email = $user->getEmail();
-  //     $userModel->save();
-
-  //     $user->setId($userModel->id);
-  // }
-
 }

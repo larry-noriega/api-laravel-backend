@@ -4,7 +4,7 @@ declare(strict_types= 1);
 
 namespace App\Domain\Repository;
 
-use App\Domain\Models\DocumentTypeModel;
+use App\Domain\Models\DocumentType;
 use Illuminate\Support\Collection;
 
 interface DocumentTypeRepository
@@ -12,6 +12,6 @@ interface DocumentTypeRepository
 
   public function GetAllDocumentTypes(): Collection;
 
-  public function GetDocumentTypeByID(int $id): ?DocumentTypeModel;
+  public function GetDocumentTypeByID(int $id): ?DocumentType;
 
 }

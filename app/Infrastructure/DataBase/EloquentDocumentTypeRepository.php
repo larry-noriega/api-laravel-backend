@@ -4,7 +4,7 @@ declare(strict_types= 1);
 
 namespace App\Infrastructure\DataBase;
 
-use App\Domain\Models\DocumentTypeModel;
+use App\Domain\Models\DocumentType;
 use App\Domain\Repository\DocumentTypeRepository;
 use Illuminate\Support\Collection;
 
@@ -15,14 +15,14 @@ class EloquentDocumentTypeRepository implements DocumentTypeRepository
    */
   public function GetAllDocumentTypes(): Collection
   {
-    return DocumentTypeModel::all();
+    return DocumentType::all();
   }
 
   /**
    * @inheritDoc
    */
-  public function GetDocumentTypeByID(int $id): ?DocumentTypeModel
+  public function GetDocumentTypeByID(int $id): ?DocumentType
   {
-    return DocumentTypeModel::findOrFail($id);
+    return DocumentType::findOrFail($id);
   }
 }

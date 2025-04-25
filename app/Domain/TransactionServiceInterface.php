@@ -5,6 +5,7 @@ declare(strict_types= 1);
 namespace App\Domain;
 
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Domain\Models\Transaction;
 
 
 interface TransactionServiceInterface
@@ -14,4 +15,6 @@ interface TransactionServiceInterface
      * @return LengthAwarePaginator
      */
     public function GetTransactionsReport(): LengthAwarePaginator;
+
+    public function GetTransactionByID(int $id): Transaction;
 }

@@ -4,7 +4,7 @@
 
   namespace App\Application\Services;
 
-  use App\Domain\Models\TransactionModel;
+  use App\Domain\Models\Transaction;
   use App\Domain\TransactionServiceInterface;
   use \App\Domain\Repository\CustomerRepository;
   use \App\Domain\Repository\PaymentMethodRepository;
@@ -41,7 +41,7 @@
       return $transactions;
     }
 
-    public function GetTransactionByID(int $id): TransactionModel
+    public function GetTransactionByID(int $id): Transaction
     {
       return $this->transactionRepository->GetTransactionByID($id);
     }

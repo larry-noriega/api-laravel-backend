@@ -13,15 +13,28 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-    $table->unsignedBigInteger('customer_id');
-    $table->unsignedBigInteger('payment_method_id')->nullable();
-    $table->decimal('amount', 10, 2);
-    $table->string('currency');
-    $table->decimal('fee', 10, 2)->nullable();
-    $table->decimal('total', 10, 2)->nullable();
-    $table->string('status'); 
-    $table->json('metadata'); 
-    $table->timestamps();
+            $table->foreignId('customer_id')
+                ->constrained('customers', 'id')
+                ->onDelete('restrict');
+
+            $table->foreignId('payment_method_id')
+                ->nullable()
+                ->constrained('payment_methods', 'id')
+                ->onDelete('restrict');
+
+            $table->decimal('amount', 10, 2);
+
+            $table->string('currency')->nullable();
+            $table->foreign('currency')                
+                ->references('value')
+                ->on('currencies')
+                ->onDelete('restrict');
+
+            $table->decimal('fee', 10, 2)->nullable();
+            $table->decimal('total', 10, 2)->nullable();
+            $table->string('status'); 
+            $table->json('metadata'); 
+            $table->timestamps();
         });
     }
 

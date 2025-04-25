@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presenter\Http\Controllers\Api\V1;
 
-use App\Application\Services\PaymentService;
-use App\Application\Services\TransactionService;
+use App\Domain\TransactionServiceInterface;
 use App\Presenter\Http\Controllers\Api\V1\Controller;
 use App\Presenter\Resources\CustomerResource;
 use App\Presenter\Resources\PaymentMethodResource;
@@ -15,10 +14,9 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    protected TransactionService $transactionService;
-    protected PaymentService $paymentService;
+    protected TransactionServiceInterface $transactionService;
 
-    public function __construct(TransactionService $transactionService)
+    public function __construct(TransactionServiceInterface $transactionService)
     {
         $this->transactionService = $transactionService;
     }
@@ -46,10 +44,8 @@ class TransactionController extends Controller
      * @param Request $request
      * @return TransactionResource
      */
-    public function show(Request $request): TransactionResource
+    public function show(int $id): TransactionResource
     {
-        $id = $request->id;
-
         return new TransactionResource($this->transactionService->GetTransactionByID( (int)$id));     
     }
 

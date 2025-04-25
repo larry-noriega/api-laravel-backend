@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\DataBase;
 
-use App\Domain\Models\TransactionModel;
+use App\Domain\Models\Transaction;
 use App\Domain\Repository\TransactionRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -16,24 +16,24 @@ class EloquentTransactionRepository implements TransactionRepository
    */
   public function GetTransactionPage(): LengthAwarePaginator
   {
-    return TransactionModel::paginate();    
+    return Transaction::paginate();    
   }
 
-  public function GetTransactionByID(int $id): TransactionModel
+  public function GetTransactionByID(int $id): Transaction
   {
-    return TransactionModel::findOrFail(id: $id);
+    return Transaction::findOrFail(id: $id);
   }
 
-  public function CreateTransaction(TransactionModel $transaction): TransactionModel
+  public function CreateTransaction(Transaction $transaction): Transaction
   {
     $transaction->save([$transaction]);
 
     return $transaction;
   }
 
-  public function UpdateTransaction(TransactionModel $transaction): TransactionModel
+  public function UpdateTransaction(Transaction $transaction): Transaction
   {
-    $transaction = TransactionModel::where('id', $transaction->transaction_id)
+    $transaction = Transaction::where('id', $transaction->transaction_id)
     ->update([
         'customer_id' => $transaction->customerId,
         'payment_method_id' => $transaction->payment_method_id,
@@ -46,7 +46,7 @@ class EloquentTransactionRepository implements TransactionRepository
         'updated_at' => now()
     ]);
 
-    $transaction = TransactionModel::findOrFail($transaction);
+    $transaction = Transaction::findOrFail($transaction);
 
     return $transaction;
   }

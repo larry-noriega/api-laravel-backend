@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Application\Services;
 
-use App\Domain\Models\CustomerModel;
-use App\Domain\Models\TransactionModel;
+use App\Domain\Models\Customer;
+use App\Domain\Models\Transaction;
 use App\Domain\PaymentServiceInterface;
 use \App\Domain\Repository\CustomerRepository;
 use \App\Domain\Repository\PaymentMethodRepository;
@@ -33,7 +33,7 @@ class PaymentService implements PaymentServiceInterface
 
     if ($customer === null) {
 
-      $customer = new CustomerModel();
+      $customer = new Customer();
       $customer->name = $data['name'];
       $customer->email = $data['email'];
       $customer->type_document = $data['type_document'];
@@ -45,7 +45,7 @@ class PaymentService implements PaymentServiceInterface
       $customer = $customerCreated;
     }
 
-    $transaction = new TransactionModel();
+    $transaction = new Transaction();
     $transaction->customer_id = $customer->id;
     $transaction->amount = $data['amount'];
     $transaction->currency = $data['currency'];
@@ -61,7 +61,7 @@ class PaymentService implements PaymentServiceInterface
     ];
   }
 
-  public function generatePayment(Request $request): TransactionModel 
+  public function generatePayment(Request $request): Transaction 
   {
     $data = $request->all();
 
@@ -70,7 +70,7 @@ class PaymentService implements PaymentServiceInterface
     $fee = json_decode($paymentMethod->config)->fee ?? 0;
     $total = $data['amount'] + $fee;
 
-    $transaction = TransactionModel::where('id', $data['transaction_id'])
+    $transaction = Transaction::where('id', $data['transaction_id'])
       ->update([
         'customer_id' => $data['customerId'],
         'payment_method_id' => $paymentMethod->id,
